@@ -1,0 +1,55 @@
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.1.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.1.0 http://maven.apache.org/xsd/assembly-2.1.0.xsd">
+    <!-- 组装ID（可选，用于区分不同组装包） -->
+    <id>distribution</id>
+    <!-- 打包格式为zip -->
+    <formats>
+        <format>zip</format>
+    </formats>
+    <!-- 不包含基础目录（避免zip内嵌套多余文件夹） -->
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <!-- 定义要包含的文件集 -->
+    <fileSets>
+        <!-- 包含生成的可执行jar包 -->
+        <fileSet>
+            <directory>${project.build.directory}</directory>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>${project.build.finalName}.jar</include>
+            </includes>
+        </fileSet>
+        <!-- 包含deploy文件夹下的所有资源（如启动脚本、Dockerfile等） -->
+        <fileSet>
+            <directory>${project.basedir}/src/main/resources/deploy</directory>
+            <outputDirectory>deploy</outputDirectory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>${project.basedir}/src/main/resources/config</directory>
+            <outputDirectory>config</outputDirectory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>${project.basedir}/src/main/resources/logs</directory>
+            <outputDirectory>logs</outputDirectory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>${project.basedir}/src/main/resources/tmp</directory>
+            <outputDirectory>tmp</outputDirectory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+</assembly>
